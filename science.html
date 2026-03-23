@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Science | The Sanctuary</title>
+    <style>
+        :root { --bg: #000; --text: #fff; --accent: #2D3E50; --muted: #444; --line: #111; }
+        body, html { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: -apple-system, sans-serif; line-height: 1.9; overflow-x: hidden; }
+
+        /* THE TOP-LEFT GATEWAY LOGO */
+        #top-gateway {
+            position: fixed; top: 40px; left: 10%; z-index: 500;
+            display: flex; align-items: center; gap: 15px; text-decoration: none;
+        }
+        #top-gateway img { width: 30px; height: 30px; }
+        #gateway-title { font-weight: 800; letter-spacing: 4px; font-size: 0.8rem; color: #fff; opacity: 0.8; }
+
+        /* UNIFIED BOTTOM DOCK */
+        nav {
+            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+            background: rgba(10, 10, 10, 0.8); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1); padding: 12px 30px; border-radius: 40px;
+            display: flex; gap: 35px; z-index: 1000;
+        }
+        nav a { color: #fff; text-decoration: none; font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; opacity: 0.4; transition: 0.3s; }
+        nav a:hover { opacity: 1; }
+        nav a.active { opacity: 1; font-weight: 600; }
+
+        .grain { position: fixed; top: -50%; left: -50%; width: 200%; height: 200%; z-index: 100; pointer-events: none; background-image: url("https://grainy-gradients.vercel.app/noise.svg"); opacity: 0.1; animation: grain-dance 8s steps(10) infinite; }
+        @keyframes grain-dance { 0% { transform: translate(0,0); } 100% { transform: translate(0,0); } }
+
+        article { max-width: 680px; margin: 150px auto 250px; padding: 0 30px; }
+        .label { font-size: 0.65rem; color: var(--muted); text-transform: uppercase; letter-spacing: 5px; display: block; margin-bottom: 20px; }
+        h1 { font-size: clamp(2.5rem, 6vw, 3.8rem); font-weight: 200; margin: 0 0 50px; letter-spacing: -3px; color: #fff; }
+        h2 { font-size: 1.8rem; font-weight: 300; margin-top: 100px; margin-bottom: 40px; color: #fff; letter-spacing: -1px; }
+        p { font-size: 1.2rem; color: #999; font-weight: 300; margin-bottom: 35px; }
+        strong { color: #fff; font-weight: 400; }
+
+        .dialogue-box { background: #050505; border: 1px solid var(--line); padding: 60px; margin-top: 60px; }
+        .chapter-label { font-size: 0.7rem; color: var(--accent); letter-spacing: 3px; text-transform: uppercase; font-weight: 600; margin-bottom: 25px; display: block; }
+        .thought { font-size: 1.3rem; color: #ddd; font-style: italic; display: block; margin-bottom: 25px; line-height: 1.5; }
+        .realization { color: #666; font-size: 1.1rem; margin-bottom: 60px; display: block; }
+        .realization:last-child { margin-bottom: 0; }
+
+        .footer-cta { text-align: center; padding: 120px 0; background: #000; }
+        .cta-btn { background: white; color: black; border: none; padding: 18px 50px; font-weight: 600; border-radius: 2px; cursor: pointer; text-decoration: none; display: inline-block; transition: 0.3s; }
+        .cta-btn:hover { letter-spacing: 2px; }
+    </style>
+</head>
+<body>
+    <div class="grain"></div>
+
+    <a href="index.html" id="top-gateway">
+        <img src="https://i.ibb.co/3Wq8p8K/gateway-purple.png" alt="Sanctuary Logo">
+        <span id="gateway-title">THE SANCTUARY</span>
+    </a>
+
+    <nav>
+        <a href="index.html">Mirror</a>
+        <a href="science.html" class="active">Science</a>
+        <a href="manifesto.html">Manifesto</a>
+    </nav>
+
+    <article>
+        <span class="label">Neurology & Intent</span>
+        <h1>The Science of Scarcity</h1>
+        <p>In an era of infinite feeds, the most radical act is to build a ceiling. This is why we replaced the algorithm with a limit.</p>
+        
+        <section id="the-trap">
+            <h2>The Dopamine Slot Machine</h2>
+            <p>Every swipe is a gamble. The brain seeks variable rewards, making the "infinite feed" impossible to quit through willpower alone. By limiting the world to 24 frequencies, we restore <strong>Digital Satiety</strong>.</p>
+        </section>
+
+        <section id="architecture">
+            <h2>The Architecture of Focus</h2>
+            <p>The brain is plastic. It can be re-trained to have a 10-second attention span, and it can be re-trained for depth. The Sanctuary provides the structural support for that training. By limiting the choice, we restore your neuroplasticity.</p>
+        </section>
+
+        <section id="dialogue">
+            <h2>Dialogue with the Mirror</h2>
+            <div class="dialogue-box">
+                <span class="chapter-label">Chapter I: The Withdrawal</span>
+                <span class="thought">"Will I be bored? I'm afraid of missing out."</span>
+                <span class="realization">Yes. Boredom is the recalibration of the mind. In the silence of the Sanctuary, you finally begin to hear your own frequency.</span>
+
+                <span class="chapter-label">Chapter II: The Ghost in the Machine</span>
+                <span class="thought">"Why is there no algorithm to curate my interests?"</span>
+                <span class="realization">An algorithm is a ghost that makes choices for you. In the Sanctuary, <strong>you</strong> are the curator. We don't track you because we don't want to predict you. We want to surprise you.</span>
+
+                <span class="chapter-label">Chapter III: The Phantom Vibration</span>
+                <span class="thought">"I find myself reaching for my phone in every micro-moment of silence."</span>
+                <span class="realization">This is the Phantom Vibration. Your brain has been trained to trade its peace for a reward that never arrives. In the Sanctuary, we don't fill the void; we let you live in it until the urge subsides.</span>
+
+                <span class="chapter-label">Chapter IV: The High-Signal Social</span>
+                <span class="thought">"If I only post once, will my voice be lost in the noise?"</span>
+                <span class="realization">On the infinite feed, reach is cheap. In the Sanctuary, resonance is everything. Because every user is intentional with their 24 frequencies, your one post carries the weight of a thousand shallow impressions.</span>
+
+                <span class="chapter-label">Chapter V: The Joy of Missing Out</span>
+                <span class="thought">"What if something 'important' happens while I am away?"</span>
+                <span class="realization">Most 'breaking news' is just broken noise. If it matters, it will wait for your next session. Reclaiming JOMO is the first step toward reclaiming your time. The world will still be there when you return.</span>
+
+                <span class="chapter-label">Chapter VI: The End of Performance</span>
+                <span class="thought">"I feel like I don't have to perform for an audience here."</span>
+                <span class="realization">That is intentional. We removed the metrics that turn human interaction into a scorecard. In the Sanctuary, you don't post for the 'hit'; you post for the thought. When you remove the score, you restore the sincerity.</span>
+            </div>
+        </section>
+    </article>
+
+    <div class="footer-cta">
+        <a href="index.html" class="cta-btn">Return to the Mirror</a>
+    </div>
+
+</body>
+</html>

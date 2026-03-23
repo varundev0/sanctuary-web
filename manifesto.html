@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Manifesto | The Sanctuary</title>
+    <style>
+        :root { --bg: #000; --text: #fff; --accent: #2D3E50; --muted: #444; --line: #111; }
+        body, html { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: -apple-system, serif; line-height: 1.6; overflow-x: hidden; }
+
+        /* THE TOP-LEFT GATEWAY LOGO */
+        #top-gateway {
+            position: fixed; top: 40px; left: 10%; z-index: 500;
+            display: flex; align-items: center; gap: 15px; text-decoration: none;
+        }
+        #top-gateway img { width: 30px; height: 30px; }
+        #gateway-title { font-weight: 800; letter-spacing: 4px; font-size: 0.8rem; color: #fff; opacity: 0.8; }
+
+        /* UNIFIED BOTTOM DOCK */
+        nav {
+            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+            background: rgba(10, 10, 10, 0.8); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1); padding: 12px 30px; border-radius: 40px;
+            display: flex; gap: 35px; z-index: 1000; box-shadow: 0 20px 50px rgba(0,0,0,0.9);
+        }
+        nav a { color: #fff; text-decoration: none; font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; opacity: 0.4; transition: 0.3s; font-family: sans-serif; }
+        nav a:hover { opacity: 1; }
+        nav a.active { opacity: 1; font-weight: 600; }
+
+        .grain { position: fixed; top: -50%; left: -50%; width: 200%; height: 200%; z-index: 100; pointer-events: none; background-image: url("https://grainy-gradients.vercel.app/noise.svg"); opacity: 0.08; animation: grain-dance 8s steps(10) infinite; }
+        @keyframes grain-dance { 0% { transform: translate(0,0); } 100% { transform: translate(0,0); } }
+
+        article { max-width: 750px; margin: 150px auto 250px; padding: 0 40px; }
+        .label { font-size: 0.65rem; color: var(--muted); text-transform: uppercase; letter-spacing: 5px; margin-bottom: 40px; display: block; font-family: sans-serif; }
+        h1 { font-size: clamp(2.5rem, 8vw, 5rem); font-weight: 200; letter-spacing: -4px; line-height: 1.1; margin-bottom: 100px; color: #fff; }
+        .section-quote { font-size: 2.2rem; font-weight: 200; color: #fff; margin-bottom: 60px; border-left: 2px solid var(--accent); padding-left: 40px; letter-spacing: -1px; }
+        p { font-size: 1.25rem; color: #888; margin-bottom: 60px; font-weight: 300; font-family: sans-serif; }
+        .highlight { color: #fff; font-weight: 400; }
+    </style>
+</head>
+<body>
+    <div class="grain"></div>
+
+    <a href="index.html" id="top-gateway">
+        <img src="https://i.ibb.co/3Wq8p8K/gateway-purple.png" alt="Sanctuary Logo">
+        <span id="gateway-title">THE SANCTUARY</span>
+    </a>
+
+    <nav>
+        <a href="index.html">Mirror</a>
+        <a href="science.html">Science</a>
+        <a href="manifesto.html" class="active">Manifesto</a>
+    </nav>
+
+    <article>
+        <span class="label">A Declaration</span>
+        <h1>Silence is the ultimate luxury.</h1>
+        <div class="section-quote">"We built a social network that ends, so your life can begin."</div>
+        <p>We did not choose to be overwhelmed. We were invited into a digital world that promised connection but delivered fragmentation. We traded our deep focus for shallow engagement, and our peace for the constant buzz of an algorithm that does not know our names.</p>
+        <p>The Sanctuary is a refusal. A refusal to let the machine decide the rhythm of your day. It is a return to intentionality, built for the writers who have lost their focus and the founders who have lost their flow.</p>
+        <div class="section-quote" style="border-left-color: #444;">One post. One session. 24 frequencies.</div>
+        <p>True intelligence requires a pause. True creativity requires a void. The Sanctuary operates on the principle of the Digital Sabbath—the intentional choice to stop the scroll, to tune into exactly 24 windows of thought, and then to walk away.</p>
+        <p>This is for the writers, the founders, and the seekers. We are building the post-dopamine internet. We are building the Sanctuary.</p>
+    </article>
+</body>
+</html>

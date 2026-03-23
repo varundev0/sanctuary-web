@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Sanctuary | The Mirror</title>
+    <style>
+        :root { --bg: #000; --text: #fff; --navy: #2D3E50; --muted: #444; }
+        body, html { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: -apple-system, sans-serif; overflow-x: hidden; scroll-behavior: auto; }
+
+        /* THE TOP-LEFT GATEWAY LOGO */
+        #top-gateway {
+            position: fixed; top: 40px; left: 10%; z-index: 500;
+            display: flex; align-items: center; gap: 15px; text-decoration: none;
+        }
+        #top-gateway img { width: 30px; height: 30px; }
+        #gateway-title { font-weight: 800; letter-spacing: 4px; font-size: 0.8rem; color: #fff; opacity: 0.8; }
+
+        /* UNIFIED BOTTOM DOCK */
+        nav {
+            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+            background: rgba(10, 10, 10, 0.8); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1); padding: 12px 30px; border-radius: 40px;
+            display: flex; gap: 35px; z-index: 1000; box-shadow: 0 20px 50px rgba(0,0,0,0.9);
+        }
+        nav a { color: #fff; text-decoration: none; font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; opacity: 0.4; transition: 0.3s; pointer-events: all; }
+        nav a:hover { opacity: 1; }
+        nav a.active { opacity: 1; font-weight: 600; }
+
+        .grain { position: fixed; top: -50%; left: -50%; width: 200%; height: 200%; z-index: 100; pointer-events: none; background-image: url("https://grainy-gradients.vercel.app/noise.svg"); opacity: 0.08; animation: grain-dance 8s steps(10) infinite; }
+        @keyframes grain-dance { 0% { transform: translate(0,0); } 100% { transform: translate(0,0); } }
+
+        /* UI LAYER - GRANULAR FADING */
+        #ui-layer { position: fixed; left: 10%; top: 50%; transform: translateY(-50%); width: 40%; z-index: 50; pointer-events: none; }
+        .text-group { 
+            position: absolute; width: 100%; top: 0; 
+            transition: visibility 0.3s; /* Visibility still used for click-through stability */
+            visibility: hidden; opacity: 0; 
+            will-change: opacity, transform;
+        }
+        .text-group.visible { visibility: visible; }
+
+        .label { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 5px; margin-bottom: 15px; }
+        .title { font-size: clamp(3rem, 7vw, 4.5rem); font-weight: 200; margin: 0; letter-spacing: -2px; line-height: 1.1; }
+        .desc { margin-top: 25px; color: #777; font-size: 1rem; line-height: 1.6; max-width: 350px; font-weight: 300; }
+
+        /* THE DONUT TICKER RIG */
+        #ticker-rig { position: fixed; right: -35vh; top: 50%; transform: translateY(-50%); width: 90vh; height: 90vh; z-index: 10; pointer-events: none; }
+        #donut-svg { width: 100%; height: 100%; filter: drop-shadow(-20px 10px 40px rgba(0,0,0,0.5)); will-change: transform; }
+        .segment { stroke: rgba(255,255,255,0.02); stroke-width: 0.3; transition: fill 0.3s ease; }
+
+        .scroll-space { height: 1000vh; }
+
+        /* FINAL SECTION */
+        #final-section { height: 100vh; width: 100%; display: flex; align-items: center; justify-content: center; position: fixed; top: 0; left: 0; z-index: 30; opacity: 0; pointer-events: none; }
+        .final-title { font-weight: 200; font-size: 2.2rem; margin: 0; letter-spacing: -1px; }
+        .final-label { color: #555; font-size: 0.85rem; margin-top: 10px; }
+        .cta { background: white; color: black; border: none; padding: 15px 40px; margin-top: 25px; font-weight: 600; border-radius: 2px; cursor: pointer; pointer-events: all; }
+    </style>
+</head>
+<body>
+    <div class="grain"></div>
+
+    <a href="index.html" id="top-gateway">
+        <img src="https://i.ibb.co/3Wq8p8K/gateway-purple.png" alt="Sanctuary Logo">
+        <span id="gateway-title">THE SANCTUARY</span>
+    </a>
+
+    <nav>
+        <a href="index.html" class="active">Mirror</a>
+        <a href="science.html">Science</a>
+        <a href="manifesto.html">Manifesto</a>
+    </nav>
+
+    <div id="ui-layer">
+        <div id="hero-text" class="text-group visible" style="opacity: 1;">
+            <div class="label">Phase 01</div>
+            <h1 class="title">The Mirror</h1>
+            <p class="desc">One post. One session. 24 frequencies. Conceived in Delhi, built for the world.</p>
+        </div>
+        <div id="ticker-text" class="text-group">
+            <div id="freq-num" class="label">Frequency 01/24</div>
+            <h1 id="active-cat" class="title">Science</h1>
+            <p class="desc">Intentional social interaction. High signal, zero compulsion.</p>
+        </div>
+    </div>
+
+    <div class="scroll-space"></div>
+
+    <section id="final-section">
+        <div style="text-align:center;">
+            <h1 class="final-title">Enter the Sanctuary</h1>
+            <p class="final-label">Global Beta now rolling.</p>
+            <button class="cta">Request Access</button>
+        </div>
+    </section>
+
+    <div id="ticker-rig">
+        <svg id="donut-svg" viewBox="0 0 100 100">
+            <g id="segments-group"></g>
+            <circle cx="50" cy="50" r="32" fill="black" /> 
+        </svg>
+    </div>
+
+    <script>
+        const segmentsGroup = document.getElementById('segments-group');
+        const donutSvg = document.getElementById('donut-svg');
+        const hero = document.getElementById('hero-text');
+        const ticker = document.getElementById('ticker-text');
+        const activeCat = document.getElementById('active-cat');
+        const freqNum = document.getElementById('freq-num');
+        const tickerRig = document.getElementById('ticker-rig');
+        const finalSection = document.getElementById('final-section');
+
+        const colors = ['#D8C9C0', '#BDC7C9', '#C5D1C1', '#D1C5D9', '#E5D0CC', '#B8C5D6'];
+        const categories = ["Science", "Philosophy", "Art", "History", "Nature", "Literature", "Mindfulness", "Economics", "Music", "Tech", "Wellness", "Design", "Astronomy", "Sociology", "Poetry", "Biology", "Physics", "Ethics", "Psychology", "Space", "Geography", "Math", "Culture", "Silence"];
+        const paths = [];
+
+        for (let i = 0; i < 24; i++) {
+            const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+            path.setAttribute("d", describeArc(50, 50, 48, 32, i * 15, (i + 1) * 15));
+            path.setAttribute("fill", colors[i % colors.length]);
+            segmentsGroup.appendChild(path);
+            paths.push(path);
+        }
+
+        function describeArc(x, y, r, ir, start, end){
+            const s = polToCar(x, y, r, end), e = polToCar(x, y, r, start), si = polToCar(x, y, ir, end), ei = polToCar(x, y, ir, start);
+            return [`M`,s.x,s.y,`A`,r,r,0,0,0,e.x,e.y,`L`,ei.x,ei.y,`A`,ir,ir,0,0,1,si.x,si.y,`Z`].join(" ");
+        }
+        function polToCar(cx, cy, r, deg) { const rad = (deg - 90) * Math.PI / 180.0; return { x: cx + (r * Math.cos(rad)), y: cy + (r * Math.sin(rad)) }; }
+
+        function render() {
+            const scrollY = window.pageYOffset;
+            const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+            const pct = Math.max(0, Math.min(1, scrollY / maxScroll));
+
+            const curRot = pct * 360;
+            donutSvg.style.transform = `rotate(${curRot}deg)`;
+
+            const activeIndex = Math.floor(curRot / 15) % 24;
+            paths.forEach((p, i) => p.setAttribute("fill", i === activeIndex ? '#2D3E50' : colors[i % colors.length]));
+            activeCat.innerText = categories[activeIndex];
+            freqNum.innerText = `Frequency ${String(activeIndex + 1).padStart(2, '0')}/24`;
+
+            // GRANULAR FADING ENGINE
+            // 1. Hero Text Fade Out (0% to 10%)
+            if (pct < 0.1) {
+                const opacity = 1 - (pct / 0.1);
+                hero.style.opacity = opacity;
+                hero.classList.add('visible');
+                ticker.style.opacity = pct / 0.1;
+                ticker.classList.add('visible');
+                tickerRig.style.opacity = 1;
+                finalSection.style.opacity = 0;
+            } 
+            // 2. Ticker Text Peak (10% to 80%)
+            else if (pct >= 0.1 && pct < 0.8) {
+                hero.style.opacity = 0;
+                hero.classList.remove('visible');
+                ticker.style.opacity = 1;
+                ticker.classList.add('visible');
+                tickerRig.style.opacity = 1;
+                finalSection.style.opacity = 0;
+            } 
+            // 3. Ticker Out / Final In (80% to 100%)
+            else {
+                const fadeOut = 1 - ((pct - 0.8) / 0.2);
+                const fadeIn = (pct - 0.8) / 0.2;
+                hero.classList.remove('visible');
+                ticker.style.opacity = fadeOut;
+                tickerRig.style.opacity = fadeOut;
+                finalSection.style.opacity = fadeIn;
+                if (pct > 0.95) {
+                    finalSection.style.pointerEvents = "all";
+                    ticker.classList.remove('visible');
+                } else {
+                    finalSection.style.pointerEvents = "none";
+                    ticker.classList.add('visible');
+                }
+            }
+
+            requestAnimationFrame(render);
+        }
+        render();
+    </script>
+</body>
+</html>
