@@ -12,57 +12,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Sanctuary | The Mirror</title>
     <style>
-        :root { --bg: #000; --text: #fff; --navy: #2D3E50; --muted: #444; }
-        body, html { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: -apple-system, sans-serif; overflow-x: hidden; scroll-behavior: auto; }
+        :root { --bg: #000; --text: #fff; --accent: #2D3E50; --muted: #444; }
+body, html { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: -apple-system, sans-serif; overflow-x: hidden; scroll-behavior: auto; }
 
-        /* THE TOP-LEFT GATEWAY LOGO */
-        #top-gateway {
-            position: fixed; top: 40px; left: 10%; z-index: 500;
-            display: flex; align-items: center; gap: 15px; text-decoration: none;
-        }
-        #top-gateway img { width: 30px; height: 30px; }
-        #gateway-title { font-weight: 800; letter-spacing: 4px; font-size: 0.8rem; color: #fff; opacity: 0.8; }
+/* THE TOP-LEFT GATEWAY LOGO */
+#top-gateway { position: fixed; top: 30px; left: 8%; z-index: 500; display: flex; align-items: center; gap: 12px; text-decoration: none; }
+#top-gateway img { width: 22px; height: 22px; }
+#gateway-title { font-weight: 800; letter-spacing: 4px; font-size: 0.7rem; color: #fff; opacity: 0.8; }
 
-        /* UNIFIED BOTTOM DOCK */
-        nav {
-            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
-            background: rgba(10, 10, 10, 0.8); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1); padding: 12px 30px; border-radius: 40px;
-            display: flex; gap: 35px; z-index: 1000; box-shadow: 0 20px 50px rgba(0,0,0,0.9);
-        }
-        nav a { color: #fff; text-decoration: none; font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; opacity: 0.4; transition: 0.3s; pointer-events: all; }
-        nav a:hover { opacity: 1; }
-        nav a.active { opacity: 1; font-weight: 600; }
+/* NAV DOCK - SMALLER FOR MOBILE */
+nav {
+    position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+    background: rgba(10, 10, 10, 0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1); padding: 10px 20px; border-radius: 40px;
+    display: flex; gap: 20px; z-index: 1000; width: fit-content; max-width: 90vw; justify-content: space-around;
+}
+nav a { color: #fff; text-decoration: none; font-size: 0.6rem; letter-spacing: 1.5px; text-transform: uppercase; opacity: 0.4; }
+nav a.active { opacity: 1; font-weight: 600; }
 
-        .grain { position: fixed; top: -50%; left: -50%; width: 200%; height: 200%; z-index: 100; pointer-events: none; background-image: url("https://grainy-gradients.vercel.app/noise.svg"); opacity: 0.08; animation: grain-dance 8s steps(10) infinite; }
-        @keyframes grain-dance { 0% { transform: translate(0,0); } 100% { transform: translate(0,0); } }
+/* THE GRAIN */
+.grain { position: fixed; top: -50%; left: -50%; width: 200%; height: 200%; z-index: 100; pointer-events: none; background-image: url("https://grainy-gradients.vercel.app/noise.svg"); opacity: 0.08; }
 
-        /* UI LAYER - GRANULAR FADING */
-        #ui-layer { position: fixed; left: 10%; top: 50%; transform: translateY(-50%); width: 40%; z-index: 50; pointer-events: none; }
-        .text-group { 
-            position: absolute; width: 100%; top: 0; 
-            transition: visibility 0.3s; /* Visibility still used for click-through stability */
-            visibility: hidden; opacity: 0; 
-            will-change: opacity, transform;
-        }
-        .text-group.visible { visibility: visible; }
+/* MOBILE-FIRST LAYOUT */
+#ui-layer { position: fixed; left: 8%; top: 15%; width: 84%; z-index: 50; pointer-events: none; }
+.text-group { position: absolute; width: 100%; top: 0; transition: opacity 0.5s ease; opacity: 0; visibility: hidden; }
+.text-group.visible { opacity: 1; visibility: visible; pointer-events: all; }
 
-        .label { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 5px; margin-bottom: 15px; }
-        .title { font-size: clamp(3rem, 7vw, 4.5rem); font-weight: 200; margin: 0; letter-spacing: -2px; line-height: 1.1; }
-        .desc { margin-top: 25px; color: #777; font-size: 1rem; line-height: 1.6; max-width: 350px; font-weight: 300; }
+.label { font-size: 0.6rem; color: var(--muted); text-transform: uppercase; letter-spacing: 4px; margin-bottom: 10px; }
+.title { font-size: clamp(2.2rem, 10vw, 4.5rem); font-weight: 200; margin: 0; letter-spacing: -2px; line-height: 1.1; }
+.desc { margin-top: 15px; color: #777; font-size: 0.9rem; line-height: 1.6; max-width: 300px; font-weight: 300; }
 
-        /* THE DONUT TICKER RIG */
-        #ticker-rig { position: fixed; right: -35vh; top: 50%; transform: translateY(-50%); width: 90vh; height: 90vh; z-index: 10; pointer-events: none; }
-        #donut-svg { width: 100%; height: 100%; filter: drop-shadow(-20px 10px 40px rgba(0,0,0,0.5)); will-change: transform; }
-        .segment { stroke: rgba(255,255,255,0.02); stroke-width: 0.3; transition: fill 0.3s ease; }
+#ticker-rig { 
+    position: fixed; 
+    right: 50%; 
+    bottom: -15vh; /* Tuck donut at bottom for mobile */
+    transform: translateX(50%); 
+    width: 90vw; 
+    height: 90vw; 
+    z-index: 10; 
+    pointer-events: none; 
+}
+#donut-svg { width: 100%; height: 100%; filter: drop-shadow(0px -10px 30px rgba(0,0,0,0.5)); will-change: transform; }
 
-        .scroll-space { height: 1000vh; }
+.scroll-space { height: 1000vh; }
 
-        /* FINAL SECTION */
-        #final-section { height: 100vh; width: 100%; display: flex; align-items: center; justify-content: center; position: fixed; top: 0; left: 0; z-index: 30; opacity: 0; pointer-events: none; }
-        .final-title { font-weight: 200; font-size: 2.2rem; margin: 0; letter-spacing: -1px; }
-        .final-label { color: #555; font-size: 0.85rem; margin-top: 10px; }
-        .cta { background: white; color: black; border: none; padding: 15px 40px; margin-top: 25px; font-weight: 600; border-radius: 2px; cursor: pointer; pointer-events: all; }
+#final-section { height: 100vh; width: 100%; display: flex; align-items: center; justify-content: center; position: fixed; top: 0; left: 0; z-index: 30; opacity: 0; pointer-events: none; padding: 0 20px; box-sizing: border-box; }
+.final-title { font-weight: 200; font-size: 1.8rem; margin: 0; letter-spacing: -1px; text-align: center; }
+.cta { background: white; color: black; border: none; padding: 15px 40px; margin-top: 25px; font-weight: 600; border-radius: 2px; width: 100%; max-width: 250px; cursor: pointer; pointer-events: all; }
+
+/* DESKTOP RE-ADJUSTMENT (Screens wider than 768px) */
+@media (min-width: 768px) {
+    #ui-layer { left: 10%; top: 50%; transform: translateY(-50%); width: 40%; }
+    #ticker-rig { right: -35vh; top: 50%; transform: translateY(-50%); width: 90vh; height: 90vh; bottom: auto; }
+    nav { padding: 12px 30px; gap: 35px; bottom: 30px; }
+    .title { font-size: 4.5rem; }
+    .desc { font-size: 1rem; max-width: 350px; }
+    #top-gateway { top: 40px; left: 10%; }
+}
     </style>
 </head>
 <body>
