@@ -1,0 +1,74 @@
+:root {
+    --bg: #000;
+    --text: #fff;
+    --navy: #2D3E50;
+    --muted: #444;
+    --line: #111;
+    --accent: #2D3E50;
+}
+
+body, html { 
+    margin: 0; padding: 0; 
+    background: var(--bg); color: var(--text); 
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif; 
+    scroll-behavior: auto; 
+}
+
+/* PAGE TRANSITIONS */
+body {
+    opacity: 0;
+    transition: opacity 0.5s ease-out;
+}
+body.page-loaded {
+    opacity: 1;
+}
+
+@view-transition { navigation: auto; } /* Native cross-doc transition for modern Chromium */
+
+/* THE TOP-LEFT GATEWAY LOGO */
+#top-gateway {
+    position: fixed; top: 40px; left: 10%; z-index: 500;
+    display: flex; align-items: center; gap: 15px; text-decoration: none;
+}
+/* Mobile specific override handled selectively if needed, though interface.html uses top: 0 layout. We will unify to top: 40px for desktop default or let pages override. Wait, interface.html has background block for gateway. 
+Let's abstract the core bits that all share. */
+#top-gateway {
+    position: fixed; top: 0; left: 0; width: 100%; z-index: 500;
+    display: flex; align-items: center; gap: 15px; text-decoration: none;
+    background: rgba(0,0,0,0.8); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+    height: 80px; padding-left: 10%; box-sizing: border-box;
+}
+@media (min-width: 768px) {
+    #top-gateway { top: 40px; left: 10%; width: auto; background: transparent; padding: 0; backdrop-filter: none; height: auto; }
+}
+
+#top-gateway img { width: 30px; height: 30px; border-radius: 50%; }
+#gateway-title { font-weight: 800; letter-spacing: 4px; font-size: 0.8rem; color: #fff; opacity: 0.8; }
+
+/* UNIFIED BOTTOM DOCK */
+nav {
+    position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+    background: rgba(10, 10, 10, 0.8); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1); padding: 12px 30px; border-radius: 40px;
+    display: flex; gap: 35px; z-index: 1000; box-shadow: 0 20px 50px rgba(0,0,0,0.9);
+}
+@media (max-width: 767px) {
+    nav { width: 90%; gap: 15px; justify-content: space-between; padding: 12px 20px; box-sizing: border-box; }
+    nav a { font-size: 0.6rem; letter-spacing: 1px; }
+}
+nav a { color: #fff; text-decoration: none; font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; opacity: 0.4; transition: 0.3s; pointer-events: all; }
+nav a:hover { opacity: 1; }
+nav a.active { opacity: 1; font-weight: 600; }
+
+/* FILM GRAIN */
+.grain { 
+    position: fixed; top: -50%; left: -50%; width: 200%; height: 200%; z-index: 100; 
+    pointer-events: none; 
+    background-image: url("noise.svg"); 
+    opacity: 0.08; 
+    animation: grain-dance 8s steps(10) infinite; 
+}
+@keyframes grain-dance { 
+    0% { transform: translate(0,0); } 
+    100% { transform: translate(0,0); } 
+}
