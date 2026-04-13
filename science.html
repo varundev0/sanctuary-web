@@ -1,42 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="icon" type="image/png" href="favicon.jpeg">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta property="og:title" content="The Sanctuary | Phase 01: The Mirror">
-    <meta property="og:description" content="One post. One session. 24 frequencies. Conceived in Delhi, built for the world.">
-    <meta property="og:image" content="https://thesanctuaryapp.app/logo.jpeg">
-    <meta property="og:url" content="https://thesanctuaryapp.app">
-    <meta name="twitter:card" content="summary_large_image">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Science | The Sanctuary</title>
+    <link rel="stylesheet" href="global.css">
+    <script src="transitions.js" defer></script>
     <style>
-        :root { --bg: #000; --text: #fff; --accent: #2D3E50; --muted: #444; --line: #111; }
-        body, html { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: -apple-system, sans-serif; line-height: 1.9; overflow-x: hidden; }
-
-        /* THE TOP-LEFT GATEWAY LOGO */
-        #top-gateway {
-            position: fixed; top: 40px; left: 10%; z-index: 500;
-            display: flex; align-items: center; gap: 15px; text-decoration: none;
-        }
-        #top-gateway img { width: 30px; height: 30px; }
-        #gateway-title { font-weight: 800; letter-spacing: 4px; font-size: 0.8rem; color: #fff; opacity: 0.8; }
-
-        /* UNIFIED BOTTOM DOCK */
-        nav {
-            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
-            background: rgba(10, 10, 10, 0.8); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1); padding: 12px 30px; border-radius: 40px;
-            display: flex; gap: 35px; z-index: 1000;
-        }
-        nav a { color: #fff; text-decoration: none; font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; opacity: 0.4; transition: 0.3s; }
-        nav a:hover { opacity: 1; }
-        nav a.active { opacity: 1; font-weight: 600; }
-
-        .grain { position: fixed; top: -50%; left: -50%; width: 200%; height: 200%; z-index: 100; pointer-events: none; background-image: url("https://grainy-gradients.vercel.app/noise.svg"); opacity: 0.1; animation: grain-dance 8s steps(10) infinite; }
-        @keyframes grain-dance { 0% { transform: translate(0,0); } 100% { transform: translate(0,0); } }
-
+        body, html { line-height: 1.9; }
         article { max-width: 680px; margin: 150px auto 250px; padding: 0 30px; }
         .label { font-size: 0.65rem; color: var(--muted); text-transform: uppercase; letter-spacing: 5px; display: block; margin-bottom: 20px; }
         h1 { font-size: clamp(2.5rem, 6vw, 3.8rem); font-weight: 200; margin: 0 0 50px; letter-spacing: -3px; color: #fff; }
@@ -49,26 +20,24 @@
         .thought { font-size: 1.3rem; color: #ddd; font-style: italic; display: block; margin-bottom: 25px; line-height: 1.5; }
         .realization { color: #666; font-size: 1.1rem; margin-bottom: 60px; display: block; }
         .realization:last-child { margin-bottom: 0; }
-
-        .footer-cta { text-align: center; padding: 120px 0; background: #000; }
-        .cta-btn { background: white; color: black; border: none; padding: 18px 50px; font-weight: 600; border-radius: 2px; cursor: pointer; text-decoration: none; display: inline-block; transition: 0.3s; }
-        .cta-btn:hover { letter-spacing: 2px; }
     </style>
 </head>
 <body>
     <div class="grain"></div>
 
     <a href="index.html" id="top-gateway">
-        <img src="logo.jpeg" alt="Sanctuary Logo">
+        <img src="Unknown.png" alt="Sanctuary Logo">
         <span id="gateway-title">THE SANCTUARY</span>
     </a>
 
     <nav>
         <a href="index.html">Mirror</a>
         <a href="science.html" class="active">Science</a>
+        <a href="interface.html">Interface</a>
         <a href="manifesto.html">Manifesto</a>
     </nav>
 
+    <main>
     <article>
         <span class="label">Neurology & Intent</span>
         <h1>The Science of Scarcity</h1>
@@ -113,10 +82,7 @@
             </div>
         </section>
     </article>
-
-    <div class="footer-cta">
-        <a href="index.html" class="cta-btn">Return to the Mirror</a>
-    </div>
+    </main>
 
 </body>
 </html>
