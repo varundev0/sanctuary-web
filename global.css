@@ -27,19 +27,10 @@ body.page-loaded {
 
 /* THE TOP-LEFT GATEWAY LOGO */
 #top-gateway {
-    position: fixed; top: 40px; left: 10%; z-index: 500;
-    display: flex; align-items: center; gap: 15px; text-decoration: none;
-}
-/* Mobile specific override handled selectively if needed, though interface.html uses top: 0 layout. We will unify to top: 40px for desktop default or let pages override. Wait, interface.html has background block for gateway. 
-Let's abstract the core bits that all share. */
-#top-gateway {
     position: fixed; top: 0; left: 0; width: 100%; z-index: 500;
+    height: 80px; padding: 0 8%; box-sizing: border-box;
     display: flex; align-items: center; gap: 15px; text-decoration: none;
     background: rgba(0,0,0,0.8); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
-    height: 80px; padding-left: 10%; box-sizing: border-box;
-}
-@media (min-width: 768px) {
-    #top-gateway { top: 40px; left: 10%; width: auto; background: transparent; padding: 0; backdrop-filter: none; height: auto; }
 }
 
 #top-gateway img { width: 30px; height: 30px; border-radius: 50%; }
@@ -53,8 +44,9 @@ nav {
     display: flex; gap: 35px; z-index: 1000; box-shadow: 0 20px 50px rgba(0,0,0,0.9);
 }
 @media (max-width: 767px) {
-    nav { width: 90%; gap: 15px; justify-content: space-between; padding: 12px 20px; box-sizing: border-box; }
-    nav a { font-size: 0.6rem; letter-spacing: 1px; }
+    nav { width: 96%; max-width: 400px; gap: 4px; justify-content: space-evenly; padding: 12px 10px; box-sizing: border-box; }
+    nav a { font-size: 0.55rem; letter-spacing: 0.5px; }
+    nav span { font-size: 0.55rem; }
 }
 nav a { color: #fff; text-decoration: none; font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; opacity: 0.4; transition: 0.3s; pointer-events: all; }
 nav a:hover { opacity: 1; }
