@@ -9,9 +9,16 @@
     <link rel="stylesheet" href="global.css">
     <script src="transitions.js" defer></script>
     <style>
+        body, html {
+            overflow: hidden;
+            height: 100%;
+            touch-action: none;
+            overscroll-behavior: none;
+        }
+        
         /* STICKY CONTAINER */
         .sticky-container {
-            height: 800vh; /* 8 stages */
+            height: 100vh;
             position: relative;
             width: 100%;
         }
@@ -44,21 +51,22 @@
             .sticky-wrapper {
                 flex-direction: column;
                 padding-top: 80px; /* Space for gateway */
-                padding-bottom: 80px; /* Space for nav */
+                padding-bottom: 100px; /* Space for nav */
+                box-sizing: border-box;
             }
             .text-container {
                 width: 100%;
-                height: 35vh;
+                height: 35%;
                 justify-content: center;
-                padding: 20px 8% 0;
+                padding: 10px 8% 0;
                 box-sizing: border-box;
             }
             .phone-container {
                 width: 100%;
-                height: 50vh;
+                height: 65%;
             }
             .phone-frame {
-                transform: scale(0.65) rotateX(10deg) rotateY(-10deg) rotateZ(2deg) !important;
+                transform: scale(0.6) rotateX(10deg) rotateY(-10deg) rotateZ(2deg) !important;
             }
         }
         @media (min-width: 768px) {
@@ -173,9 +181,9 @@
     </a>
 
     <nav>
-        <a href="index.html">MIRROR</a> <span style="opacity:0.2">//</span>
-        <a href="science.html">SCIENCE</a> <span style="opacity:0.2">//</span>
-        <a href="interface.html" class="active">INTERFACE</a> <span style="opacity:0.2">//</span>
+        <a href="index.html">MIRROR</a> <span style="opacity:0.2">||</span>
+        <a href="science.html">SCIENCE</a> <span style="opacity:0.2">||</span>
+        <a href="interface.html" class="active">INTERFACE</a> <span style="opacity:0.2">||</span>
         <a href="manifesto.html">MANIFESTO</a>
     </nav>
 
@@ -249,17 +257,28 @@
         let currentProgress = 0;
         let targetProgress = 0;
 
-        function render() {
-            // Calculate scroll progress within the sticky container
-            const offsetTop = stickyContainer.offsetTop;
-            const scrollHeight = stickyContainer.offsetHeight - window.innerHeight;
-            let scrollPos = window.scrollY - offsetTop;
-            
-            let rawProgress = scrollPos / scrollHeight;
-            rawProgress = Math.max(0, Math.min(1, rawProgress));
+        // Custom Gesture Hijacking
+        window.addEventListener('wheel', (e) => {
+            targetProgress += e.deltaY * 0.0015;
+            targetProgress = Math.max(0, Math.min(1, targetProgress));
+        }, {passive: false});
 
+        let touchStartY = 0;
+        window.addEventListener('touchstart', (e) => {
+            touchStartY = e.touches[0].clientY;
+        }, {passive: false});
+
+        window.addEventListener('touchmove', (e) => {
+            e.preventDefault(); // Prevents native bouncing
+            let touchY = e.touches[0].clientY;
+            let deltaY = touchStartY - touchY;
+            targetProgress += deltaY * 0.002;
+            targetProgress = Math.max(0, Math.min(1, targetProgress));
+            touchStartY = touchY;
+        }, {passive: false});
+
+        function render() {
             // Smooth interpolation for the scroll (easing)
-            targetProgress = rawProgress;
             currentProgress += (targetProgress - currentProgress) * 0.05; // Heavier, premium lerp
 
             if (Math.abs(targetProgress - currentProgress) > 0.0001) {
